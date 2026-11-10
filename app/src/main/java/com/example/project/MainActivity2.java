@@ -1,24 +1,79 @@
 package com.example.project;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity2 extends AppCompatActivity {
+
+    private TextView affichageNom;
+    private TextView affichageAge;
+    private TextView affichageMotif;
+    private Button boutonApprouver;
+    private Button boutonRefuser;
+
+    private String nomVoyageur;
+    private String motifVoyageur; // <-- AJOUTÉ ICI pour s'en souvenir
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main2);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.root_layout_ok), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        affichageNom = findViewById(R.id.text_nom_nj);
+        affichageAge = findViewById(R.id.text_age_nj);
+        affichageMotif = findViewById(R.id.text_motif_nj);
+        boutonApprouver = findViewById(R.id.btn_approuver_nj);
+        boutonRefuser = findViewById(R.id.btn_refuser_nj);
+
+        Intent intent = getIntent();
+        nomVoyageur = intent.getStringExtra(Cles.cleNom(Cles.MATRICULE));
+        int anneeNaissance = intent.getIntExtra(Cles.cleAnneeNaissance(Cles.MATRICULE), 0);
+        int anneeDestination = intent.getIntExtra(Cles.cleAnneeDestination(Cles.MATRICULE), 0);
+        motifVoyageur = intent.getStringExtra(Cles.cleMotif(Cles.MATRICULE)); // <-- Récupération du motif
+
+        int ageTemporel = Math.abs(anneeDestination - anneeNaissance);
+
+        affichageNom.setText("Nom : " + nomVoyageur);
+        affichageAge.setText("Âge temporel : " + ageTemporel + " ans");
+        affichageMotif.setText("Motif : " + motifVoyageur);
+
+        if ("Modification du passé".equals(motifVoyageur) && estPremier(ageTemporel)) {
+            boutonApprouver.setEnabled(false);
+        }
+
+        boutonApprouver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ouvrirVerdict(true);
+            }
         });
+
+        boutonRefuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ouvrirVerdict(false);
+            }
+        });
+    }
+
+    private void ouvrirVerdict(boolean estApprouve) {
+        Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
+        intent.putExtra(Cles.cleVerdict(Cles.MATRICULE), estApprouve);
+        intent.putExtra(Cles.cleNom(Cles.MATRICULE), nomVoyageur);
+        intent.putExtra(Cles.cleMotif(Cles.MATRICULE), motifVoyageur); // <-- ON ENVOIE LE MOTIF ICI
+        startActivity(intent);
+    }
+
+    private boolean estPremier(int nombre) {
+        if (nombre < 2) return false;
+        for (int diviseur = 2; diviseur * diviseur <= nombre; diviseur++) {
+            if (nombre % diviseur == 0) return false;
+        }
+        return true;
     }
 }

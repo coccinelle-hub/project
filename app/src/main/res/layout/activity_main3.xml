@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root_layout_ok"
+    android:id="@+id/layout_verdict_nj"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity3">
@@ -31,16 +31,16 @@
                 app:srcCompat="@drawable/capture_d__cran_2026_11_09_170909" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/text_recap_nom_nj"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Nom:" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/text_recap_motif_nj"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Motif:" />
 
@@ -48,20 +48,23 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/tv_titre_ok"
+        android:id="@+id/text_titre_nj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:text="Bon voyage "
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_desc_ok" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_status_ok"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/btn_nouveau_ok"
+        android:id="@+id/btn_nouveau_nj"
         android:layout_width="180dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
@@ -71,10 +74,10 @@
         android:text="Nouveau voyageur"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.548"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9"
+        app:layout_constraintVertical_bias="0.899"
         tools:ignore="MissingConstraints" />
 
     <ImageView
@@ -87,22 +90,23 @@
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.442"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256"
+        app:layout_constraintVertical_bias="0.055"
         app:srcCompat="@drawable/capture_d__cran_2026_11_09_053741" />
 
     <TextView
-        android:id="@+id/tv_desc_ok"
+        android:id="@+id/text_message_nj"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="32dp"
         android:text="Vous avez été approuvée pour votre saut temporel"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.403"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
